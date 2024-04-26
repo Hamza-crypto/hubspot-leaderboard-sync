@@ -10,34 +10,24 @@ use NotificationChannels\Telegram\TelegramChannel;
 class WebhookController extends Controller
 {
     public $hubspot_controller;
+    public $customer_controller;
 
     public function __construct()
     {
         $this->hubspot_controller = new HubspotController();
+        $this->customer_controller = new CustomerController();
     }
 
     public function webhook(Request $request)
     {
         $data = $request->all()[0];
 
-
         $customer_id = $data['objectId'];
 
-        $url = sprintf("objects/contacts/%s?properties=of_applicants,email,agent", $customer_id);
+        $url = sprintf("objects/contacts/%s?properties=firstname,lastname,email,agent,of_applicants", $customer_id);
 
         $response = $this->hubspot_controller->call($url, 'GET');
 
-        dd($response);
-        // Check if response status is 200 and it contains the "id" field
-        // if (isset($response['id'])) {
-
-        //     $data_array['msg'] = sprintf('Webhook successfuly sent for user: %s', $response['fields']['Email']);
-        //     Notification::route(TelegramChannel::class, '')->notify(new AirTableNotification($data_array));
-
-        //     return 'Record successfully created in AirTable';
-        // } else {
-        //     return $response; // Return appropriate message if creation failed
-        // }
-
+        $this->customer_controller->store($response);
     }
 }
