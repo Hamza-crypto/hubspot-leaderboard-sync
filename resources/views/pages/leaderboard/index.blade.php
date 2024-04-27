@@ -12,8 +12,9 @@
                     <div class="tab-content">
 
                         <div class="tab-pane fade text-center active show" id="tab-5" role="tabpanel">
-
                             <button class="btn btn-primary">NCA LEADERBOARD</button>
+                            <button class="btn btn-square btn-success" disabled="">
+                                {{ now()->format('d-M-Y') }}</button>
                         </div>
 
                     </div>
