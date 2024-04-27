@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +23,7 @@ class Customer extends Model
                 return;
             }
 
-            $totalLeads = static::where('agent', $agentName)->sum('leads');
+            $totalLeads = static::where('agent', $agentName)->whereDate('created_at', Carbon::today())->sum('leads');
 
             // Find or create leaderboard entry
             $leaderboard = Leaderboard::firstOrNew(['agent' => $agentName]);
