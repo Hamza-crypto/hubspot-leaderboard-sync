@@ -18,7 +18,7 @@ class CustomerController extends Controller
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
             'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
-            'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : '',
+            'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
         ];
 
         // Check if the customer already exists in the database
