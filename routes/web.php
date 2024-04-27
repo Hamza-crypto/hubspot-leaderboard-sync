@@ -48,5 +48,5 @@ Route::get('optimize', function () {
 
 
 Route::controller(LeaderboardController::class)->group(function () {
-    Route::get('leaderboard', 'index');
+    Route::get('leaderboard', 'index')->middleware('checkAppKey');
 });
