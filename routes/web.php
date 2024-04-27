@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\WebhookController;
 use App\Models\AirTable;
 use App\Notifications\AirTableNotification;
@@ -42,4 +43,10 @@ Route::get('migrate', function () {
 Route::get('optimize', function () {
     Artisan::call('optimize:clear');
     dump('Optimization Done');
+});
+
+
+
+Route::controller(LeaderboardController::class)->group(function () {
+    Route::get('leaderboard', 'index');
 });

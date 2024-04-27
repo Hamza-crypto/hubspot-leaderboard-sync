@@ -34,7 +34,9 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         if ($this->shouldReport($exception)) {
-            $this->sendTelegramNotification($exception);
+            if(env('APP_ENV') == 'local1') {
+                $this->sendTelegramNotification($exception);
+            }
         }
 
         parent::report($exception);
