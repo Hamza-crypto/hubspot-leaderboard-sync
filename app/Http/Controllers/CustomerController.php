@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Http\Request;
+use App\Notifications\GeneralNotification;
+use Illuminate\Support\Facades\Notification;
+use NotificationChannels\Telegram\TelegramChannel;
 
 class CustomerController extends Controller
 {
@@ -26,13 +28,20 @@ class CustomerController extends Controller
             // Update the existing customer's "of_applicants" field
             $existingCustomer->update($customerData);
 
+            $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
+
+
             dump('Record updated');
 
         } else {
             // Create a new customer record
             Customer::create($customerData);
+
+            $data_array['msg'] = sprintf('New customer created: %s %s', $customerData['agent'], $customerData['leads']);
+
             dump('New record created');
         }
+        Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
 
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class AirTableNotification extends Notification
+class GeneralNotification extends Notification
 {
     use Queueable;
 
@@ -27,7 +27,7 @@ class AirTableNotification extends Notification
     public function toTelegram($notifiable)
     {
         $msg = $this->msg;
-        $telegram_id = env('TELEGRAM_CRISP_AIRTABLE');
+        $telegram_id = env('TELEGRAM_HUBSPOT');
 
         return TelegramMessage::create()
         // Optional recipient user id.
@@ -38,7 +38,7 @@ class AirTableNotification extends Notification
 
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line('The introduction to the notification.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
