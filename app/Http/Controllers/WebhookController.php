@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Notifications\AirTableNotification;
+use App\Models\Leaderboard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
-use NotificationChannels\Telegram\TelegramChannel;
 
 class WebhookController extends Controller
 {
