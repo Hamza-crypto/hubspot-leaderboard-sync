@@ -27,7 +27,9 @@ class WebhookController extends Controller
         $subscriptionType = $data['subscriptionType'];
 
         if($subscriptionType == 'contact.deletion') {
-            Customer::where('customer_id', $customer_id)->delete();
+            $customer = Customer::where('customer_id', $customer_id)->first();
+            Leaderboard::where('agent', $customer->agent)->delete();
+            $customer->delete();
             return;
         }
 
