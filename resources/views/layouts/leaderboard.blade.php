@@ -30,8 +30,9 @@
                 </div>
             </main>
 
-            @include('includes.footer')
+            {{-- @include('includes.footer') --}}
         </div>
+
     </div>
 
 

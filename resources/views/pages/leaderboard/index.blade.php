@@ -7,6 +7,24 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+
+                <div class="card-body">
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade text-center active show" id="tab-5" role="tabpanel">
+
+                            <button class="btn btn-primary">NCA LEADERBOARD</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
                 <div class="card-body">
                     <div id="datatables-clients_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
@@ -17,12 +35,12 @@
                                     <thead>
                                         <tr>
                                             <th rowspan="1" colspan="1" style="width: 56px;"
-                                                aria-label="#: activate to sort column ascending">#</th>
+                                                aria-label="#: activate to sort column ascending">Rank #</th>
                                             <th rowspan="1" colspan="1" style="width: 212px;" aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending">Agent</th>
 
                                             <th rowspan="1" colspan="1" style="width: 97px;"
-                                                aria-label="Status: activate to sort column ascending">Leads</th>
+                                                aria-label="Status: activate to sort column ascending">Deals</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,5 +78,8 @@
             </div>
         </div>
     </div>
+
+
+
 
 @endsection
