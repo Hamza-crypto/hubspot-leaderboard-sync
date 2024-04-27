@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Notifications\AirTableNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -22,7 +23,16 @@ class WebhookController extends Controller
     {
         $data = $request->all()[0];
 
+
         $customer_id = $data['objectId'];
+
+        $subscriptionType = $data['subscriptionType'];
+
+        if($subscriptionType == 'contact.deletion') {
+            Customer::where('customer_id', $customer_id)->delete();
+            return;
+        }
+
 
         $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types", $customer_id);
         $response = $this->hubspot_controller->call($url, 'GET');
