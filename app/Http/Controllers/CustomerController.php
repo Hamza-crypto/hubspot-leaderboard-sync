@@ -23,10 +23,14 @@ class CustomerController extends Controller
 
         if ($existingCustomer) {
             // Update the existing customer's "of_applicants" field
-            $existingCustomer->update(['leads' => $customerData['leads']]);
+            $existingCustomer->update($customerData);
+
+            dump('Record updated');
+
         } else {
             // Create a new customer record
             Customer::create($customerData);
+            dump('New record created');
         }
 
     }
@@ -34,6 +38,10 @@ class CustomerController extends Controller
 
     private function getFullName($properties)
     {
+        if($properties['customer_name'] != null) {
+            return $properties['customer_name'];
+        }
+
         $firstName = isset($properties['firstname']) ? $properties['firstname'] : '';
         $lastName = isset($properties['lastname']) ? $properties['lastname'] : '';
 

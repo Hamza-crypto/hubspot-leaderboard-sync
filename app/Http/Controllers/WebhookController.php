@@ -24,7 +24,7 @@ class WebhookController extends Controller
 
         $customer_id = $data['objectId'];
 
-        $url = sprintf("objects/contacts/%s?properties=firstname,lastname,email,agent,of_applicants", $customer_id);
+        $url = sprintf("objects/contacts/%s?properties=customer_name,email,agent,of_applicants", $customer_id);
 
         $response = $this->hubspot_controller->call($url, 'GET');
 
