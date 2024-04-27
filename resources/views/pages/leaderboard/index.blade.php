@@ -27,14 +27,31 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($agents as $row)
+                                            @php
+                                                $leadCount = $row->leads;
+                                                $leadClass = '';
+
+                                                if ($leadCount == 0) {
+                                                    $leadClass = 'danger';
+                                                } elseif ($leadCount >= 1 && $leadCount <= 5) {
+                                                    $leadClass = 'warning';
+                                                } elseif ($leadCount >= 6 && $leadCount <= 10) {
+                                                    $leadClass = 'info';
+                                                } elseif ($leadCount >= 11 && $leadCount <= 20) {
+                                                    $leadClass = 'primary';
+                                                } else {
+                                                    $leadClass = 'success';
+                                                }
+                                            @endphp
+
                                             <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                                                 <td class="sorting_1">{{ $loop->iteration }}</td>
                                                 <td class="sorting_1">{{ $row->agent }}</td>
-                                                <td><span class="badge bg-success">{{ $row->leads }}</span></td>
+                                                <td><span class="badge bg-{{ $leadClass }}">{{ $leadCount }}</span>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
                             </div>
                         </div>
 
