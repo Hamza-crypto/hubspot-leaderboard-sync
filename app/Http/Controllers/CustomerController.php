@@ -14,12 +14,13 @@ class CustomerController extends Controller
             'customer_id' => $data['id'],
             'name' => $this->getFullName($data['properties']),
             'email' => $data['properties']['email'],
-            'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : null,
+            'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
             'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
+            'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : '',
         ];
 
         // Check if the customer already exists in the database
-        $existingCustomer = Customer::where('email', $customerData['email'])->first();
+        $existingCustomer = Customer::where('customer_id', $customerData['customer_id'])->first();
 
         if ($existingCustomer) {
             // Update the existing customer's "of_applicants" field

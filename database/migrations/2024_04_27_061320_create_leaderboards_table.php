@@ -10,13 +10,10 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('leaderboards', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_id');
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('agent')->nullable();
-            $table->integer('leads')->default(0);
+            $table->string('agent');
+            $table->string('leads')->default(0);
             $table->string('tab')->nullable();
             $table->timestamps();
         });
@@ -27,6 +24,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('leaderboards');
     }
 };
