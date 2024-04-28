@@ -20,25 +20,27 @@ class WebhookController extends Controller
 
     public function webhook(Request $request)
     {
+        //Cache::forget('dashboard_stats_cache');
 
-        Cache::forget('dashboard_stats_cache');
 
-        $data = $request->all()[0];
+        foreach ($request->all() as $data) {
+            $customer_id = $data['objectId'];
+            $subscriptionType = $data['subscriptionType'];
 
-        $customer_id = $data['objectId'];
+            if ($subscriptionType == 'contact.deletion') {
+                $customer = Customer::where('customer_id', $customer_id)->first();
+                if ($customer) {
+                    Leaderboard::where('agent', $customer->agent)->delete();
+                    $customer->delete();
+                }
+                continue; // Move to the next item in the loop
+            }
 
-        $subscriptionType = $data['subscriptionType'];
+            $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types", $customer_id);
+            $response = $this->hubspot_controller->call($url, 'GET');
 
-        if($subscriptionType == 'contact.deletion') {
-            $customer = Customer::where('customer_id', $customer_id)->first();
-            Leaderboard::where('agent', $customer->agent)->delete();
-            $customer->delete();
-            return;
+            $this->customer_controller->store($response);
         }
 
-        $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types", $customer_id);
-        $response = $this->hubspot_controller->call($url, 'GET');
-
-        $this->customer_controller->store($response);
     }
 }
