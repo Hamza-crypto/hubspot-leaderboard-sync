@@ -12,6 +12,19 @@ class DashboardController extends Controller
     //For admin dashboard
     public function index()
     {
+        $total_customers = Customer::count();
+        $total_deals = Customer::sum('leads');
+
+
+        $response = [
+            'total_users' => $total_customers,
+            'total_deals' => $total_deals,
+            'users_chart' => $this->chartData(Customer::class),
+        ];
+
+        return response()->json($response);
+
+
         $cacheKey = 'dashboard_stats_cache';
         $cacheDuration = Carbon::now()->addHours(2);
         $cachedData = Cache::get($cacheKey);
