@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $cacheDuration = Carbon::now()->addHours(2);
         $cachedData = Cache::get($cacheKey);
 
-        if (!$cachedData) {
+        if ($cachedData) {
             return $cachedData;
         } else {
             /*

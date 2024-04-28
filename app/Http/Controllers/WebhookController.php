@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Leaderboard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class WebhookController extends Controller
 {
@@ -19,8 +20,10 @@ class WebhookController extends Controller
 
     public function webhook(Request $request)
     {
-        $data = $request->all()[0];
 
+        Cache::forget('dashboard_stats_cache');
+
+        $data = $request->all()[0];
 
         $customer_id = $data['objectId'];
 
@@ -32,7 +35,6 @@ class WebhookController extends Controller
             $customer->delete();
             return;
         }
-
 
         $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types", $customer_id);
         $response = $this->hubspot_controller->call($url, 'GET');
