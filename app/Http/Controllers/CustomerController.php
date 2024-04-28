@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Leaderboard;
 use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;
 use NotificationChannels\Telegram\TelegramChannel;
@@ -25,11 +26,14 @@ class CustomerController extends Controller
         $existingCustomer = Customer::where('customer_id', $customerData['customer_id'])->first();
 
         if ($existingCustomer) {
+            //If customer agent has been updated
+            if($customerData['agent'] != $existingCustomer->agent) {
+                Leaderboard::where('agent', $existingCustomer->agent)->delete();
+            }
             // Update the existing customer's "of_applicants" field
             $existingCustomer->update($customerData);
 
             $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
-
 
             dump('Record updated');
 
