@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Artisan;
