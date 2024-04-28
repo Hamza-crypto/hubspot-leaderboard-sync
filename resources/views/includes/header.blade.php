@@ -13,11 +13,11 @@
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown"
                     aria-expanded="false">
 
-                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->first_name }} {{ auth()->user()->last_name }}&background=293042&color=ffffff"
+                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=293042&color=ffffff"
                         class="avatar img-fluid rounded-circle mr-1" />
 
 
-                    <span class="text-dark">{{ auth()->user()->username }}</span>
+                    <span class="text-dark">{{ auth()->user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 

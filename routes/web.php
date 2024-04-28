@@ -1,13 +1,7 @@
 <?php
 
-use App\Http\Controllers\LeaderboardController;
-use App\Http\Controllers\WebhookController;
-use App\Models\AirTable;
-use App\Notifications\AirTableNotification;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Notification;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use NotificationChannels\Telegram\TelegramChannel;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +14,20 @@ use NotificationChannels\Telegram\TelegramChannel;
 |
 */
 
-
-Route::get('webhooks', function () {
-    Artisan::call('airtable:fetch-webhooks');
-});
-
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('pages.dashboard.index');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 
 Route::controller(WebhookController::class)->group(function () {
     Route::get('webhook', 'webhook');
@@ -50,3 +49,5 @@ Route::get('optimize', function () {
 Route::controller(LeaderboardController::class)->group(function () {
     Route::get('leaderboard', 'index')->middleware('checkAppKey');
 });
+
+require __DIR__.'/auth.php';

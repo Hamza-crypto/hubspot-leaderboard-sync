@@ -11,16 +11,11 @@
                 General
             </li>
             <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('dashboard.index') }}">
+                <a class="sidebar-link" href="{{ route('dashboard') }}">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-
-            <li class="sidebar-header">
-                Manage
-            </li>
-
 
         </ul>
     </div>
