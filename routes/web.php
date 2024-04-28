@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebhookController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +36,17 @@ Route::controller(WebhookController::class)->group(function () {
     Route::post('webhook', 'webhook');
 });
 
-Route::get('migrate', function () {
+Route::get('migrate/fresh', function () {
     Artisan::call('migrate:fresh --seed');
+    dump('Database Reset');
+});
+
+
+Route::get('migrate', function () {
+    Artisan::call('migrate');
     dump('Migration Done');
 });
+
 
 Route::get('optimize', function () {
     Artisan::call('optimize:clear');
