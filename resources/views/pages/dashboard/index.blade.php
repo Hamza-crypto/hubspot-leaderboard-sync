@@ -83,6 +83,9 @@
 
                     renderChart('usersChart', response.users_chart.labels, response.users_chart.createdData,
                         'New customers in last 7 days', 'Number of customers');
+
+                    renderChart('dealsChart', response.deals_chart.labels, response.deals_chart.createdData,
+                        'New deals in last 7 days', 'Number of deals');
                 },
                 error: function() {
                     alert('Failed to fetch stats from the API.');
