@@ -58,6 +58,7 @@ Route::get('optimize', function () {
 
 Route::controller(LeaderboardController::class)->group(function () {
     Route::get('leaderboard', 'index')->middleware('checkAppKey');
+    Route::get('leaderboard/spanish', 'leader_spanish')->middleware('checkAppKey');
 });
 
 require __DIR__.'/auth.php';

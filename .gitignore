@@ -19,4 +19,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-connection.php
+app/Exceptions/Handler.php

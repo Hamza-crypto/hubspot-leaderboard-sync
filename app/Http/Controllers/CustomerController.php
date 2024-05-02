@@ -46,7 +46,7 @@ class CustomerController extends Controller
 
             dump('New record created');
         }
-        //Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
+        Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
 
     }
 
