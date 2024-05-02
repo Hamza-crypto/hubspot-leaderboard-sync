@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->string('agent')->nullable();
             $table->integer('leads')->default(0);
             $table->string('tab')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

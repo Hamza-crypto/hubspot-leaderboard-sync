@@ -6,7 +6,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-2"> <span id="aor_switched"></span> </h3>
-                        <p class="mb-2">AOR SWITCHED</p>
+                        <p class="mb-2">AOR SWITCH</p>
                     </div>
                     <div class="d-inline-block ml-3">
                         <div class="stat">
