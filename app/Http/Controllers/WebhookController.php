@@ -36,7 +36,7 @@ class WebhookController extends Controller
                 continue; // Move to the next item in the loop
             }
 
-            $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types", $customer_id);
+            $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_types,hs_lead_status", $customer_id);
             $response = $this->hubspot_controller->call($url, 'GET');
 
             $this->customer_controller->store($response);
