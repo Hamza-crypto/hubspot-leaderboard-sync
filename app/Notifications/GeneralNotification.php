@@ -29,11 +29,10 @@ class GeneralNotification extends Notification
         $msg = $this->msg;
         $telegram_id = env('TELEGRAM_HUBSPOT');
 
-        return "";
-        // return TelegramMessage::create()
-        // // Optional recipient user id.
-        //     ->to($telegram_id)
-        //     ->content($msg['msg']);
+        return TelegramMessage::create()
+        // Optional recipient user id.
+            ->to($telegram_id)
+            ->content($msg['msg']);
 
     }
 

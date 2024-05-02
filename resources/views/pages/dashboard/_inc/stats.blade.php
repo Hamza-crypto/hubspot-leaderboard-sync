@@ -1,6 +1,7 @@
 @include('pages.dashboard._inc.users.stat')
 
-@include('pages.dashboard._inc.jobs.stat')
+@include('pages.dashboard._inc.today_deals.stat')
+@include('pages.dashboard._inc.status.stat')
 
 {{-- @include('pages.dashboard._inc.plans.stat') --}}
 

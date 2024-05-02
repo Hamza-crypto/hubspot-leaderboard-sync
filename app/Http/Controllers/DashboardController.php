@@ -12,15 +12,41 @@ class DashboardController extends Controller
     //For admin dashboard
     public function index()
     {
+        // dd(now());
         $total_customers = Customer::count();
         $total_deals = Customer::sum('leads');
 
-        $today_deals = Customer::whereDate('created_at', Carbon::today())->sum('leads');
+
+        // Current Total Deals for the current day
+        $current_day_deals = Customer::whereDate('created_at', Carbon::today())->sum('leads');
+
+        // Weekly Total of Deals for current week
+        $start_of_week = Carbon::now()->startOfWeek();
+        $end_of_week = Carbon::now()->endOfWeek();
+        $weekly_deals = Customer::whereBetween('created_at', [$start_of_week, $end_of_week])->sum('leads');
+
+        // Monthly Total of Deals for month
+        $start_of_month = Carbon::now()->startOfMonth();
+        $end_of_month = Carbon::now()->endOfMonth();
+        $monthly_deals = Customer::whereBetween('created_at', [$start_of_month, $end_of_month])->sum('leads');
+
+
+        $active = Customer::where('status', 'Active')->sum('leads');
+        $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
+        $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
 
         $response = [
             'total_users' => $total_customers,
+
             'total_deals' => $total_deals,
-            'today_deals' => $today_deals,
+            'current_day' => $current_day_deals,
+            'weekly' => $weekly_deals,
+            'monthly' => $monthly_deals,
+
+            'active' => $active,
+            'cancelled' => $cancelled,
+            'aor_switched' => $aor_switched,
+
             'users_chart' => $this->chartData(Customer::class),
             'deals_chart' => $this->dealsChartData(Customer::class),
         ];
