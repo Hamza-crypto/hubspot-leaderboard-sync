@@ -20,7 +20,7 @@ class CustomerController extends Controller
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
             'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
             'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
-            'status' => isset($data['properties']['hs_lead_status']) ? $data['properties']['hs_lead_status'] : null,
+            'status' => isset($data['properties']['hs_lead_status']) ? $data['properties']['hs_lead_status'] : 'AOR SWITCH',
         ];
 
         // Check if the customer already exists in the database
