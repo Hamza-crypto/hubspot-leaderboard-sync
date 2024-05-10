@@ -38,12 +38,14 @@ Route::controller(WebhookController::class)->group(function () {
 });
 
 Route::get('migrate_fresh', function () {
-    Artisan::call('migrate:fresh');
+    $res = Artisan::call('migrate:fresh');
+    dump($res);
     dump('Database Reset Successfully');
 });
 
 
 Route::get('migrate', function () {
+
     Artisan::call('migrate');
     dump('Migration Done');
 });
