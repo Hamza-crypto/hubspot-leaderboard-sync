@@ -64,3 +64,5 @@ Route::controller(LeaderboardController::class)->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//
