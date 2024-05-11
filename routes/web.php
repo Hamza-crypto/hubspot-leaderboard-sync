@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
@@ -64,3 +65,12 @@ Route::controller(LeaderboardController::class)->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+/**
+ * Guru Controllers
+ */
+
+Route::get('get-token', [GuruController::class, 'getAccessToken']);
+Route::get('refresh-token', [GuruController::class, 'getNewAccessTokenFromRefreshToken']);
+Route::get('store-jobs', [GuruController::class, 'store_jobs']);
