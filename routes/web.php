@@ -78,5 +78,5 @@ Route::get('store-jobs', [GuruController::class, 'store_jobs']);
 
 
 Route::post('bubble_webhook', function () {
-    return 200;
+    return response()->json('dsa');
 });
