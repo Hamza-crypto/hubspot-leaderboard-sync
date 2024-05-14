@@ -77,6 +77,6 @@ Route::get('store-jobs', [GuruController::class, 'store_jobs']);
 
 
 
-Route::get('bubble_webhook', function () {
+Route::post('bubble_webhook', function () {
     return 200;
 });
