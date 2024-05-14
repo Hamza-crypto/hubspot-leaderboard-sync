@@ -7,16 +7,14 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected $commands = [
-        Commands\GuruRefreshToken::class,
-        Commands\GuruFetchNewJobs::class
-    ];
-
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
+
+
+        $schedule->command('inspire')->everyMinute();
 
         $schedule->command('guru:token-refresh')
                     ->hourly();
