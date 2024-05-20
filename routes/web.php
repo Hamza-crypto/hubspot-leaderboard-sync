@@ -38,11 +38,11 @@ Route::controller(WebhookController::class)->group(function () {
     Route::post('webhook', 'webhook');
 });
 
-Route::get('migrate_fresh', function () {
-    $res = Artisan::call('migrate:fresh');
-    dump($res);
-    dump('Database Reset Successfully');
-});
+// Route::get('migrate_fresh', function () {
+//     $res = Artisan::call('migrate:fresh');
+//     dump($res);
+//     dump('Database Reset Successfully');
+// });
 
 
 Route::get('migrate', function () {
@@ -74,9 +74,3 @@ require __DIR__.'/auth.php';
 Route::get('get-token', [GuruController::class, 'getAccessToken']);
 Route::get('refresh-token', [GuruController::class, 'getNewAccessTokenFromRefreshToken']);
 Route::get('store-jobs', [GuruController::class, 'store_jobs']);
-
-
-
-Route::post('bubble_webhook', function () {
-    return response()->json('dsa');
-});
