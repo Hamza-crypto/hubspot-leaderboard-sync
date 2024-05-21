@@ -17,6 +17,14 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ request()->is('leaderboard') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('leaderboard') }}?key={{ env('TELEGRAM_BOT_TOKEN') }}">
+                    <i class="align-middle" data-feather="award"></i>
+                    <span class="align-middle">Leaderboard</span>
+                </a>
+            </li>
+
+
         </ul>
     </div>
 </nav>
