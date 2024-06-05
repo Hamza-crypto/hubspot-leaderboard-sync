@@ -19,7 +19,7 @@ class ImportHubspotContacts extends Command
             $this->error("File not found: $filePath");
             return 1;
         }
-
+        dump('Opening the file');
         // Open the CSV file for reading
         $file = fopen($filePath, 'r');
 
@@ -37,6 +37,8 @@ class ImportHubspotContacts extends Command
                 $batch = [];
             }
         }
+
+        dump('Sending the batch');
 
         if (!empty($batch)) {
             $this->insertBatch($batch);
