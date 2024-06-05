@@ -23,8 +23,8 @@
             <div class="card-body py-4">
                 <div class="media">
                     <div class="media-body">
-                        <h3 class="mb-2"> <span id="total_users"></span> </h3>
-                        <p class="mb-2">Total Customers</p>
+                        <h3 class="mb-2"> <span id="total_deals"></span> </h3>
+                        <p class="mb-2">Total Deals</p>
 
                     </div>
                     <div class="d-inline-block ml-3">

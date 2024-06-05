@@ -23,12 +23,12 @@ class DashboardController extends Controller
         // Weekly Total of Deals for current week
         $start_of_week = Carbon::now()->startOfWeek();
         $end_of_week = Carbon::now()->endOfWeek();
-        $weekly_deals = Customer::whereBetween('created_at', [$start_of_week, $end_of_week])->sum('leads');
+        $weekly_deals = Customer::whereBetween('date', [$start_of_week, $end_of_week])->sum('leads');
 
         // Monthly Total of Deals for month
         $start_of_month = Carbon::now()->startOfMonth();
         $end_of_month = Carbon::now()->endOfMonth();
-        $monthly_deals = Customer::whereBetween('created_at', [$start_of_month, $end_of_month])->sum('leads');
+        $monthly_deals = Customer::whereBetween('date', [$start_of_month, $end_of_month])->sum('leads');
 
 
         $active = Customer::where('status', 'Active')->sum('leads');
