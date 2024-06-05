@@ -71,8 +71,8 @@
                                                 <tr class="{{ $loop->odd ? 'odd' : 'even' }}">
                                                     <td class="sorting_1">{{ $loop->iteration }}</td>
                                                     <td class="sorting_1">{{ $row->agent }}</td>
-                                                    <td><span
-                                                            class="badge bg-{{ $leadClass }}">{{ $leadCount }}</span>
+                                                    <td><span class="badge bg-{{ $leadClass }}"
+                                                            style="font-size: x-large;">{{ $leadCount }}</span>
                                                     </td>
                                                 </tr>
                                             @endforeach

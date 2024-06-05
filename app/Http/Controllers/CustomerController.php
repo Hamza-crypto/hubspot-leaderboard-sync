@@ -21,6 +21,7 @@ class CustomerController extends Controller
             'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
             'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
             'status' => isset($data['properties']['hs_lead_status']) ? $data['properties']['hs_lead_status'] : 'AOR SWITCH',
+            'date' => !empty($data['properties']['date']) ? $data['properties']['date'] : null
         ];
 
         // Check if the customer already exists in the database
@@ -46,7 +47,7 @@ class CustomerController extends Controller
 
             dump('New record created');
         }
-        Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
+        //Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
 
     }
 

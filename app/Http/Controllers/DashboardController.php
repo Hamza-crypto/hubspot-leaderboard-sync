@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
 
         // Current Total Deals for the current day
-        $current_day_deals = Customer::whereDate('created_at', Carbon::today())->sum('leads');
+        $current_day_deals = Customer::whereDate('date', Carbon::today())->sum('leads');
 
         // Weekly Total of Deals for current week
         $start_of_week = Carbon::now()->startOfWeek();
