@@ -73,3 +73,9 @@ require __DIR__.'/auth.php';
 Route::get('get-token', [GuruController::class, 'getAccessToken']);
 Route::get('refresh-token', [GuruController::class, 'getNewAccessTokenFromRefreshToken']);
 Route::get('store-jobs', [GuruController::class, 'store_jobs']);
+
+
+
+Route::get('import-contacts', function () {
+    Artisan::call('import:hubspot-contacts');
+});
