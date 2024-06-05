@@ -74,7 +74,9 @@ class ImportHubspotContacts extends Command
     private function insertBatch(array $batch)
     {
         DB::table('customers')->insert($batch);
-        $this->info(sprintf('%d customers inserted.', count($batch)));
+
+        dump(sprintf('%d customers inserted.', count($batch)));
+
     }
 
 }
