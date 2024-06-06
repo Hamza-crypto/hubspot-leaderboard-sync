@@ -35,6 +35,10 @@ class DashboardController extends Controller
         $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
         $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
 
+        $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
+        $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
+        $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUES')->sum('leads');
+
         $response = [
             'total_users' => $total_customers,
 
@@ -46,6 +50,10 @@ class DashboardController extends Controller
             'active' => $active,
             'cancelled' => $cancelled,
             'aor_switched' => $aor_switched,
+
+            'carrier_to_carrier' => $carrier_to_carrier,
+            'existing_customer' => $existing_customer,
+            'enrollment_issues' => $enrollment_issues,
 
             'users_chart' => $this->chartData(Customer::class),
             'deals_chart' => $this->dealsChartData(Customer::class),
