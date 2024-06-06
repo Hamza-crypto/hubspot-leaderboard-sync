@@ -133,7 +133,7 @@ class DashboardController extends Controller
         }
 
         // Get data for leads
-        $leadData = $ModelName::where('date', '>', $startDate)
+        $leadData = $ModelName::where('date', '>=', $startDate)
             ->where('leads', '>', 0) // Consider only rows with leads > 0
             ->orderBy('date')
             ->get();
