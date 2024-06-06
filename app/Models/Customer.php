@@ -12,6 +12,10 @@ class Customer extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'date'  => 'date:Y-m-d',
+    ];
+
     // Listen for saved event
     protected static function booted()
     {

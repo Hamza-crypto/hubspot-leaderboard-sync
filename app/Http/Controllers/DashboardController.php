@@ -93,8 +93,8 @@ class DashboardController extends Controller
             $currentDate->addDay();
         }
 
-        $data = $ModelName::where('created_at', '>', $startDate)
-            ->orderBy('created_at')
+        $data = $ModelName::where('date', '>', $startDate)
+            ->orderBy('date')
             ->get();
 
         // Create an associative array with dates as keys and initial count as 0
@@ -133,9 +133,9 @@ class DashboardController extends Controller
         }
 
         // Get data for leads
-        $leadData = $ModelName::where('created_at', '>', $startDate)
+        $leadData = $ModelName::where('date', '>', $startDate)
             ->where('leads', '>', 0) // Consider only rows with leads > 0
-            ->orderBy('created_at')
+            ->orderBy('date')
             ->get();
 
         $leadCount = array_fill_keys($dateRange, 0);
@@ -143,7 +143,7 @@ class DashboardController extends Controller
 
         // Count the records for each date for leads
         $groupedLeadData = $leadData->groupBy(function ($item) {
-            return $item->created_at->format('Y-m-d');
+            return $item->date->format('Y-m-d');
         })->map(function ($group) {
             return $group->sum('leads');
         });
