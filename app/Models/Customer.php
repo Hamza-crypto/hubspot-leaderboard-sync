@@ -37,7 +37,7 @@ class Customer extends Model
             return;
         }
 
-        $totalLeads = static::where('agent', $agentName)->whereDate('created_at', Carbon::today())->sum('leads');
+        $totalLeads = static::where('agent', $agentName)->whereDate('date', Carbon::today())->sum('leads');
 
         // Find or create leaderboard entry
         $leaderboard = Leaderboard::firstOrNew(['agent' => $agentName]);
