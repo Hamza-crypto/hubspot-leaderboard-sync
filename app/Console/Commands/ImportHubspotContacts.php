@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Customer;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +13,10 @@ class ImportHubspotContacts extends Command
 
     public function handle()
     {
+
+        //Clear the table
+        Customer::query()->truncate();
+
         $filename = "all-contacts.csv";
         $filePath = public_path($filename);
 
@@ -38,8 +43,6 @@ class ImportHubspotContacts extends Command
             }
         }
 
-        dump('Sending the batch');
-
         if (!empty($batch)) {
             $this->insertBatch($batch);
         }
@@ -62,14 +65,16 @@ class ImportHubspotContacts extends Command
 
         // Map CSV fields to database fields
         return [
-            'customer_id' => $data[0], // Assuming 'Record ID' is the first column
-            'name' => $data[1] . ' ' . $data[2], // Assuming 'First Name' and 'Last Name' are in columns 1 and 2
-            'email' => $data[11], // Assuming 'Email' is in column 3
-            'agent' => $data[10] ?? '', // Assuming 'AGENT' is in column 4
-            'leads' => $data[4] ?? 0, // Assuming '#' is in column 5
-            'tab' => 'No Cost ACA', // Assuming default value
-            'status' => $data[7] ?? 'AOR SWITCH', // Assuming 'Lead Status' is in column 6
-            'date' => $date // Assign formatted date or null
+            'customer_id' => $data[0],
+            'name' => $data[1] . ' ' . $data[2],
+            'date' => $date,
+            'leads' => $data[4] ?? 0,
+            'agent' => $data[5] ?? '',
+            'email' => '',
+            'tab' => 'No Cost ACA',
+            'status' => $data[6] ?? 'AOR SWITCH',
+            'created_at' => '2024-06-10 00:00:00',
+            'updated_at' => '2024-06-10 00:00:00',
         ];
     }
 

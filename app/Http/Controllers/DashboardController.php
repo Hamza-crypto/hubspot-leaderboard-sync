@@ -39,6 +39,10 @@ class DashboardController extends Controller
         $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
         $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUES')->sum('leads');
 
+        $unpaid = Customer::where('status', 'ENROLLMENT ISSUES')->sum('leads');
+        $yes = Customer::where('status', 'ENROLLMENT ISSUES')->sum('leads');
+        $clock_exp_notice = Customer::where('status', 'ENROLLMENT ISSUES')->sum('leads');
+
         $response = [
             'total_users' => $total_customers,
 
@@ -54,6 +58,10 @@ class DashboardController extends Controller
             'carrier_to_carrier' => $carrier_to_carrier,
             'existing_customer' => $existing_customer,
             'enrollment_issues' => $enrollment_issues,
+
+            'unpaid' => $unpaid,
+            'yes' => $yes,
+            'clock_exp_notice' => $clock_exp_notice,
 
             'users_chart' => $this->chartData(Customer::class),
             'deals_chart' => $this->dealsChartData(Customer::class),
