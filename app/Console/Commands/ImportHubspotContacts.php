@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Customer;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class ImportHubspotContacts extends Command
@@ -49,6 +50,7 @@ class ImportHubspotContacts extends Command
 
         fclose($file);
 
+        Artisan::call('refresh-leaderboard');
         $this->info('Import completed successfully.');
         return 0;
     }
