@@ -37,7 +37,14 @@ class WebhookController extends Controller
             }
 
             $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_type,hs_lead_status,date", $customer_id);
-            $response = $this->hubspot_controller->call($url, 'GET');
+
+            $cacheKey = 'hubspot_response_' . $customer_id;
+
+            // Check if the response is cached
+            $response = Cache::remember($cacheKey, 20, function () use ($url) {
+                return $this->hubspot_controller->call($url, 'GET');
+            });
+
 
             $this->customer_controller->store($response);
         }

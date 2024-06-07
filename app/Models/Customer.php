@@ -20,6 +20,7 @@ class Customer extends Model
     protected static function booted()
     {
         static::saved(function ($customer) {
+            self::removeDuplicateEntries($customer);
             self::updateLeaderBoard($customer);
         });
 
@@ -27,6 +28,24 @@ class Customer extends Model
             self::updateLeaderBoard($customer);
         });
     }
+
+
+    public static function removeDuplicateEntries($customer)
+    {
+        // Find all entries for the given customer_id except the most recent one
+        $duplicates = static::where('customer_id', $customer->customer_id)
+            ->where('id', '<>', $customer->id)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        // If there are duplicates, delete them
+        if ($duplicates->count() > 0) {
+            foreach ($duplicates as $duplicate) {
+                $duplicate->delete();
+            }
+        }
+    }
+
 
     public static function updateLeaderBoard($customer)
     {
