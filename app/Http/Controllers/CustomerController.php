@@ -37,15 +37,13 @@ class CustomerController extends Controller
 
             $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
 
-            dump('Record updated');
+
 
         } else {
             // Create a new customer record
             Customer::create($customerData);
 
             $data_array['msg'] = sprintf('New customer created: %s %s', $customerData['agent'] ?? 'agent', $customerData['leads'] ?? 0);
-
-            dump('New record created');
         }
         //Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
 

@@ -42,6 +42,6 @@ class Handler extends ExceptionHandler
 
     private function sendTelegramNotification(Throwable $exception)
     {
-        Notification::route(TelegramChannel::class, '')->notify(new ExceptionOccurredNotification($exception));
+        //Notification::route(TelegramChannel::class, '')->notify(new ExceptionOccurredNotification($exception));
     }
 }
