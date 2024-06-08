@@ -41,7 +41,7 @@ class WebhookController extends Controller
             $cacheKey = 'hubspot_response_' . $customer_id;
 
             // Check if the response is cached
-            $response = Cache::remember($cacheKey, 20, function () use ($url) {
+            $response = Cache::remember($cacheKey, 5, function () use ($url) {
                 return $this->hubspot_controller->call($url, 'GET');
             });
 
