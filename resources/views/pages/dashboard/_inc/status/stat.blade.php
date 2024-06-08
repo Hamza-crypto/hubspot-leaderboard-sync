@@ -169,8 +169,8 @@
             <div class="card-body py-4">
                 <div class="media">
                     <div class="media-body">
-                        <h3 class="mb-2"> <span id="yes"></span> </h3>
-                        <p class="mb-2">YES</p>
+                        <h3 class="mb-2"> <span id="prospect"></span> </h3>
+                        <p class="mb-2">PROSPECT</p>
                     </div>
                     <div class="d-inline-block ml-3">
                         <div class="stat">
