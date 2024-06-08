@@ -70,7 +70,7 @@ class ImportHubspotContacts extends Command
             'customer_id' => $data[0],
             'name' => $data[1] . ' ' . $data[2],
             'date' => $date,
-            'leads' => $data[4] ?? 0,
+             'leads' => !empty($data[4]) ? $data[4] : 0,
             'agent' => $data[5] ?? '',
             'email' => '',
             'tab' => 'No Cost ACA',

@@ -20,7 +20,7 @@ class CustomerController extends Controller
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
             'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
             'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
-            'status' => isset($data['properties']['hs_lead_status']) ? $data['properties']['hs_lead_status'] : 'AOR SWITCH',
+            'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'AOR SWITCH',
             'date' => !empty($data['properties']['date']) ? $data['properties']['date'] : null
         ];
 
