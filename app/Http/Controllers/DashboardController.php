@@ -68,32 +68,6 @@ class DashboardController extends Controller
         ];
 
         return response()->json($response);
-
-
-        // $cacheKey = 'dashboard_stats_cache';
-        // $cacheDuration = Carbon::now()->addHours(2);
-        // $cachedData = Cache::get($cacheKey);
-
-        // if ($cachedData) {
-        //     return $cachedData;
-        // } else {
-        //     /*
-        //      * Users count based on role
-        //      */
-        //     $total_customers = Customer::count();
-        //     $total_deals = Customer::sum('leads');
-
-
-        //     $response = [
-        //         'total_users' => $total_customers,
-        //         'total_deals' => $total_deals,
-        //         'users_chart' => $this->chartData(Customer::class),
-        //     ];
-
-        //     Cache::put($cacheKey, $response, $cacheDuration);
-
-        //     return response()->json($response);
-        // }
     }
 
     public function chartData($ModelName)
