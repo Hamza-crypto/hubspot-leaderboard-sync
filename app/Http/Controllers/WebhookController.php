@@ -36,7 +36,7 @@ class WebhookController extends Controller
                 continue; // Move to the next item in the loop
             }
 
-            $url = sprintf("objects/contacts/%s?properties=customer_name,firstname,lastname,email,agent,of_applicants,zap_type,status,date", $customer_id);
+            $url = sprintf("objects/contacts/%s?properties=%s", $customer_id, env('HUBSPOT_PROPERTIES'));
 
             $cacheKey = 'hubspot_response_' . $customer_id;
 

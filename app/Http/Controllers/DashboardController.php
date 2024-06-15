@@ -30,18 +30,36 @@ class DashboardController extends Controller
         $end_of_month = Carbon::now()->endOfMonth();
         $monthly_deals = Customer::whereBetween('date', [$start_of_month, $end_of_month])->sum('leads');
 
+        if(env('APP_NAME') == 'Leaderboard No Cost ACA') {
 
-        $active = Customer::where('status', 'Active')->sum('leads');
-        $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
-        $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
+            $active = Customer::where('status', 'Active')->sum('leads');
+            $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
+            $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
 
-        $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
-        $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
-        $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
+            $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
+            $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
+            $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
 
-        $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
-        $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
-        $clock_exp_notice = Customer::where('status', 'CLOCK EXPIRATION')->sum('leads');
+            $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
+            $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
+            $clock_exp_notice = Customer::where('status', 'CLOCK EXPIRATION')->sum('leads');
+
+        } else {
+
+            $active = Customer::where('status', 'Active')->sum('leads');
+            $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
+            $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
+
+            $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
+            $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
+            $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
+
+            $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
+            $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
+            $clock_exp_notice = Customer::where('status', 'CLOCK EXPIRATION')->sum('leads');
+
+        }
+
 
         $response = [
             'total_users' => $total_customers,
