@@ -120,7 +120,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-2"> <span id="enrollment_issues"></span> </h3>
-                        <p class="mb-2">ENROLLMENT ISSUES</p>
+                        <p class="mb-2">YES</p>
                     </div>
                     <div class="d-inline-block ml-3">
                         <div class="stat">
@@ -170,7 +170,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-2"> <span id="prospect"></span> </h3>
-                        <p class="mb-2">PROSPECT</p>
+                        <p class="mb-2">PROSPECT MODE</p>
                     </div>
                     <div class="d-inline-block ml-3">
                         <div class="stat">
