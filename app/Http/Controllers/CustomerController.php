@@ -18,7 +18,7 @@ class CustomerController extends Controller
             'name' => $this->getFullName($data['properties']),
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
-            'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
+            'leads' => isset($data['properties']['number_of_applicants']) ? (int)$data['properties']['number_of_applicants'] : 0,
             'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'ACA HelpLine',
             'status' => isset($data['properties']['customer_status']) ? $data['properties']['customer_status'] : 'AOR SWITCH',
             'date' => !empty($data['properties']['date']) ? $data['properties']['date'] : null
