@@ -37,7 +37,7 @@ class DashboardController extends Controller
 
         $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
         $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
-        $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
+        $enrollment_issues = Customer::where('status', 'YES')->sum('leads');
 
         $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
         $prospect = Customer::where('status', 'PROSPECT MODE')->sum('leads');
