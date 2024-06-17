@@ -79,3 +79,8 @@ Route::get('store-jobs', [GuruController::class, 'store_jobs']);
 Route::get('import-contacts', function () {
     Artisan::call('import:hubspot-contacts');
 });
+
+
+Route::get('check_path', function () {
+    dump('ACA HelpLine');
+});
