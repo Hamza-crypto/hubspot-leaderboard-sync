@@ -216,7 +216,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-2"> <span id="today_deals_other_hubspot"></span> </h3>
-                        <p class="mb-2">NCA Leaderboard Today deals</p>
+                        <p class="mb-2">ACA Helpline Today deals</p>
                     </div>
                     <div class="d-inline-block ml-3">
                         <div class="stat">
