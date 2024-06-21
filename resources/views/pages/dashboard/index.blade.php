@@ -93,9 +93,24 @@
             });
         }
 
+        function fetchDataForOtherHubspot() {
+            $.ajax({
+                url: 'https://leadersboard1.com/api/stats/today_deals',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    populateWidgets(response);
+                },
+                error: function() {
+                    console.log('Failed to fetch stats from other huspot API.');
+                }
+            });
+        }
+
 
         $(document).ready(function() {
             fetchData();
+            fetchDataForOtherHubspot();
         });
     </script>
 @endsection

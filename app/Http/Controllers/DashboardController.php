@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         // dd(now());
-        $total_customers = Customer::count();
+        // $total_customers = Customer::count();
         $total_deals = Customer::sum('leads');
 
 
@@ -38,13 +38,13 @@ class DashboardController extends Controller
         $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
         $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
 
-        $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
-        $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
+        // $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
+        // $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
         $clock_exp_notice = Customer::where('status', 'CLOCK EXPIRATION')->sum('leads');
 
 
         $response = [
-            'total_users' => $total_customers,
+            // 'total_users' => $total_customers,
 
             'total_deals' => $total_deals,
             'current_day' => $current_day_deals,
@@ -59,8 +59,8 @@ class DashboardController extends Controller
             'existing_customer' => $existing_customer,
             'enrollment_issues' => $enrollment_issues,
 
-            'unpaid' => $unpaid,
-            'prospect' => $prospect,
+            // 'unpaid' => $unpaid,
+            // 'prospect' => $prospect,
             'clock_exp_notice' => $clock_exp_notice,
 
             'users_chart' => $this->chartData(Customer::class),
@@ -148,5 +148,15 @@ class DashboardController extends Controller
             'createdData' => $leadCount,
         ];
 
+    }
+
+    public function today_deals()
+    {
+        $current_day_deals = Customer::whereDate('date', Carbon::today())->sum('leads');
+        $response = [
+            'today_deals_other_hubspot' => $current_day_deals
+        ];
+
+        return response()->json($response);
     }
 }

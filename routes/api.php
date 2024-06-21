@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('stats', [DashboardController::class, 'index']);
+Route::get('stats/today_deals', [DashboardController::class, 'today_deals']);
