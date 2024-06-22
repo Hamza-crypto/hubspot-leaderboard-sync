@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('guru:fetch-new-jobs')
             ->everyFiveMinutes();
 
-        $schedule->command('telescope:prune --hours=48')->daily();
+        $schedule->command('telescope:prune --hours=24')->daily();
     }
 
     /**
