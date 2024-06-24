@@ -21,3 +21,4 @@ yarn-error.log
 /.vscode
 app/Exceptions/Handler.php
 public/all-contacts.csv
+database/seeders/DatabaseSeeder.php
