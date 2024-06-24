@@ -35,11 +35,11 @@ class HubspotController extends Controller
         $secondlyRateLimitRemaining = isset($headers['X-HubSpot-RateLimit-Secondly-Remaining'][0]) ? (int) $headers['X-HubSpot-RateLimit-Secondly-Remaining'][0] : null;
 
         if ($rateLimitRemaining < 3) {
-            sleep(2);
+            sleep(10);
         }
 
         if ($secondlyRateLimitRemaining < 3) {
-            sleep(2);
+            sleep(10);
         }
 
 
