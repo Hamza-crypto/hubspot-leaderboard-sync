@@ -25,7 +25,7 @@ class ProcessWebhookEvents extends Command
         $events = WebhookPayload::select('object_id')
             ->distinct()
             ->groupBy('object_id')
-            ->limit(5)
+            ->limit(20)
             ->get();
 
         // Instantiate controllers

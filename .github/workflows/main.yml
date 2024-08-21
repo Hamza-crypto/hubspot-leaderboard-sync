@@ -15,8 +15,12 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USER1 }}
+          username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
+        with:
+                  server: ${{ secrets.FTP_SERVER }}
+                  username: ${{ secrets.FTP_USER1 }}
+                  password: ${{ secrets.FTP_PASSWORD }}
 # To deploy to ACA HELP LINE server, just change FTP_USER to FTP_USER1
 
 # FTP_USER = NCA LEaderboard
