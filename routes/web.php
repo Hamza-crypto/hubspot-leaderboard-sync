@@ -4,6 +4,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhookController;
+use App\Models\WebhookPayload;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -84,8 +85,9 @@ Route::get('refresh-leaderboard', function () {
     Artisan::call('refresh-leaderboard');
 });
 
-Route::get('test--2', function () {
-    Artisan::call('webhook:process');
+Route::get('payloads', function () {
+
+    dd("Total payloads: " . WebhookPayload::count());
 });
 
 
