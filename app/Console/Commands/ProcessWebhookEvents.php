@@ -39,7 +39,7 @@ class ProcessWebhookEvents extends Command
             $object_id = $event->object_id;
 
             // Construct the HubSpot API URL
-            $url = sprintf("objects/contacts/11%s?properties=%s", $object_id, env('HUBSPOT_PROPERTIES'));
+            $url = sprintf("objects/contacts/%s?properties=%s", $object_id, env('HUBSPOT_PROPERTIES'));
 
             // Call the HubSpot API
             $response = $hubspotController->call($url, 'GET');
