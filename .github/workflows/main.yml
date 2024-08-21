@@ -5,22 +5,28 @@ on:
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Deploy to Servers
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files
+      # Deploy to the first server
+      - name: 📂 Sync files to NCA Leaderboard
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
+
+      # Deploy to the second server
+      - name: 📂 Sync files to ACA HelpLine
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-                  server: ${{ secrets.FTP_SERVER }}
-                  username: ${{ secrets.FTP_USER1 }}
-                  password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USER1 }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          
 # To deploy to ACA HELP LINE server, just change FTP_USER to FTP_USER1
 
 # FTP_USER = NCA LEaderboard
