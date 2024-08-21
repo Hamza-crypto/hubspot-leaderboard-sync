@@ -91,5 +91,5 @@ Route::get('test--2', function () {
 
 
 Route::get('check_path', function () {
-    dump('Main 2 a');
+    dump(env('APP_NAME'));
 });
