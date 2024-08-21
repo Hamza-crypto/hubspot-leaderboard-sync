@@ -62,8 +62,11 @@ class ProcessWebhookEvents extends Command
             // Mark this object ID for deletion from WebhookPayload
             $objectIdsToDelete[] = $object_id;
         }
+        if($objectIdsToDelete) {
 
-        // Bulk delete the processed object IDs from WebhookPayload
-        WebhookPayload::whereIn('object_id', $objectIdsToDelete)->delete();
+            // Bulk delete the processed object IDs from WebhookPayload
+            WebhookPayload::whereIn('object_id', $objectIdsToDelete)->delete();
+        }
+
     }
 }
