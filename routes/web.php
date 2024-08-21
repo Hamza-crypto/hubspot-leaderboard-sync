@@ -80,6 +80,14 @@ Route::get('import-contacts', function () {
     Artisan::call('import:hubspot-contacts');
 });
 
+Route::get('refresh-leaderboard', function () {
+    Artisan::call('refresh-leaderboard');
+});
+
+Route::get('test--2', function () {
+    Artisan::call('webhook:process');
+});
+
 
 
 Route::get('check_path', function () {
