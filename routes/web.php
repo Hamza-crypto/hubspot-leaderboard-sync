@@ -85,8 +85,11 @@ Route::get('refresh-leaderboard', function () {
     Artisan::call('refresh-leaderboard');
 });
 
-Route::get('payloads', function () {
+Route::get('webhook/process', function () {
+    Artisan::call('webhook:process');
+});
 
+Route::get('payloads', function () {
     dd("Total payloads: " . WebhookPayload::count());
 });
 
