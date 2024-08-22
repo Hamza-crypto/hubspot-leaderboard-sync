@@ -12,13 +12,14 @@ class CustomerController extends Controller
 {
     public function store($data)
     {
+
         // Extract data from the input array
         $customerData = [
             'customer_id' => $data['id'],
             'name' => $this->getFullName($data['properties']),
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
-            'leads' => isset($data['properties']['of_applicants']) ? (int)$data['properties']['of_applicants'] : 0,
+            'leads' => $this->getNumberOfApplicants($data['properties']),
             'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
             'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'AOR SWITCH',
             'date' => !empty($data['properties']['date']) ? $data['properties']['date'] : null
@@ -33,6 +34,7 @@ class CustomerController extends Controller
                 Leaderboard::where('agent', $existingCustomer->agent)->delete();
             }
             // Update the existing customer's "of_applicants" field
+            dump();
             $existingCustomer->update($customerData);
 
             $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
@@ -60,5 +62,16 @@ class CustomerController extends Controller
         $lastName = isset($properties['lastname']) ? $properties['lastname'] : '';
 
         return trim($firstName . ' ' . $lastName);
+    }
+
+    private function getNumberOfApplicants($properties)
+    {
+        if (isset($properties['of_applicants'])) {
+            return (int) $properties['of_applicants'];
+        } elseif (isset($properties['number_of_applicants'])) {
+            return (int) $properties['number_of_applicants'];
+        } else {
+            return 0;
+        }
     }
 }
