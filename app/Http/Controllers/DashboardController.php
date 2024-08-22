@@ -12,6 +12,14 @@ class DashboardController extends Controller
     //For admin dashboard
     public function index()
     {
+        $clock_exp = 'CLOCK EXPIRATION';
+        $prospect_ = 'PROSPECT';
+
+        if(env('APP_NAME') == 'Leaderboard NCA HELP') {
+            $clock_exp = 'CLOCK EXP NOTICE';
+            $prospect_ = 'PROSPECT MODE';
+        }
+
         // dd(now());
         // $total_customers = Customer::count();
         $total_deals = Customer::sum('leads');
@@ -39,9 +47,12 @@ class DashboardController extends Controller
         $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
 
         // $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
-        // $prospect = Customer::where('status', 'PROSPECT')->sum('leads');
-        $clock_exp_notice = Customer::where('status', 'CLOCK EXPIRATION')->sum('leads');
+        $prospect = Customer::where('status', $prospect_)->sum('leads');
 
+
+
+
+        $clock_exp_notice = Customer::where('status', $clock_exp)->sum('leads');
 
         $response = [
             // 'total_users' => $total_customers,
@@ -60,7 +71,7 @@ class DashboardController extends Controller
             'enrollment_issues' => $enrollment_issues,
 
             // 'unpaid' => $unpaid,
-            // 'prospect' => $prospect,
+            'prospect' => $prospect,
             'clock_exp_notice' => $clock_exp_notice,
 
             'users_chart' => $this->chartData(Customer::class),

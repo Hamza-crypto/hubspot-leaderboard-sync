@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v4
 
       # Deploy to the first server
-      # - name: 📂 Sync files to NCA Leaderboard
-      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      #   with:
-      #     server: ${{ secrets.FTP_SERVER }}
-      #     username: ${{ secrets.FTP_USER }}
-      #     password: ${{ secrets.FTP_PASSWORD }}
+      - name: 📂 Sync files to NCA Leaderboard
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
 
       # Deploy to the second server
       - name: 📂 Sync files to ACA HelpLine

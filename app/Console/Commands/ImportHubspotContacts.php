@@ -15,14 +15,11 @@ class ImportHubspotContacts extends Command
     public function handle()
     {
 
-        //Clear the table
-        Customer::query()->truncate();
-
         $filename = "all-contacts.csv";
         $filePath = public_path($filename);
 
         if (!file_exists($filePath)) {
-            $this->error("File not found: $filePath");
+            dump("File not found: $filePath");
             return 1;
         }
         dump('Opening the file');
@@ -33,6 +30,10 @@ class ImportHubspotContacts extends Command
         fgetcsv($file);
 
         $batchSize = 1000; // Adjust batch size as needed
+
+
+        //Clear the table
+        Customer::query()->truncate();
 
         $batch = [];
         while (($data = fgetcsv($file)) !== false) {
