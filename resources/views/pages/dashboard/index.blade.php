@@ -94,15 +94,17 @@
         }
 
         function fetchDataForOtherHubspot() {
+            const oppositeServerUrl = "{{ env('OPPOSITE_SERVER_API_URL') }}";
+
             $.ajax({
-                url: 'https://leadersboard1.com/api/stats/today_deals',
+                url: oppositeServerUrl,
                 method: 'GET',
                 dataType: 'json',
                 success: function(response) {
                     populateWidgets(response);
                 },
                 error: function() {
-                    console.log('Failed to fetch stats from other huspot API.');
+                    console.log('Failed to fetch stats from other HubSpot API.');
                 }
             });
         }
