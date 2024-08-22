@@ -21,28 +21,31 @@ class ProcessWebhookEvents extends Command
 
     public function handle()
     {
+        $processed_ids = [];
         // Fetch unique object IDs from the WebhookPayload table
-        $events = WebhookPayload::select('object_id')
-            ->distinct()
-            ->groupBy('object_id')
-            ->limit(20)
+        $events = WebhookPayload::limit(20)
             ->get();
 
         // Instantiate controllers
         $hubspotController = new HubspotController();
         $customerController = new CustomerController();
 
-        // Array to store object IDs to be deleted later
-        $objectIdsToDelete = [];
-
         foreach ($events as $event) {
             $object_id = $event->object_id;
+
+            if(in_array($object_id, $processed_ids)) { //if this object is laready processed in this run,  then ignore it.
+                continue;
+            }
+
+            $processed_ids[] = $object_id;
 
             // Construct the HubSpot API URL
             $url = sprintf("objects/contacts/%s?properties=%s", $object_id, env('HUBSPOT_PROPERTIES'));
 
             // Call the HubSpot API
             $response = $hubspotController->call($url, 'GET');
+
+            WebhookPayload::where('object_id', $object_id)->where('occured_at', $event->occured_at)->delete();
 
             // If the response is empty or invalid, delete the associated customer
             if (!$response) {
@@ -51,22 +54,11 @@ class ProcessWebhookEvents extends Command
                     Leaderboard::where('agent', $customer->agent)->delete();
                     $customer->delete();
                 }
-                // Mark this object ID for deletion from WebhookPayload
-                $objectIdsToDelete[] = $object_id;
                 continue;
             }
 
             // Store the response using the CustomerController
             $customerController->store($response);
-
-            // Mark this object ID for deletion from WebhookPayload
-            $objectIdsToDelete[] = $object_id;
         }
-        if($objectIdsToDelete) {
-
-            // Bulk delete the processed object IDs from WebhookPayload
-            WebhookPayload::whereIn('object_id', $objectIdsToDelete)->delete();
-        }
-
     }
 }

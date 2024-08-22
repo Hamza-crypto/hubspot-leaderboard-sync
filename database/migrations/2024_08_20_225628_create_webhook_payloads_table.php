@@ -13,6 +13,7 @@ return new class () extends Migration {
         Schema::create('webhook_payloads', function (Blueprint $table) {
             $table->id();
             $table->string('object_id');
+            $table->string('occured_at');
             $table->timestamps();
         });
     }
