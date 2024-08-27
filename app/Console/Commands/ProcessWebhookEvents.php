@@ -60,5 +60,7 @@ class ProcessWebhookEvents extends Command
             // Store the response using the CustomerController
             $customerController->store($response);
         }
+
+        return Command::SUCCESS;
     }
 }
