@@ -86,7 +86,7 @@ Route::get('refresh-leaderboard', function () {
 });
 
 Route::get('webhook/process', function () {
-    Artisan::call('webhook:process');
+    Artisan::call('process_webhook');
 });
 
 Route::get('payloads', function () {
