@@ -11,7 +11,7 @@ use App\Http\Controllers\CustomerController;
 
 class ProcessWebhookEvents extends Command
 {
-    protected $signature = 'webhook:process';
+    protected $signature = 'webhook:process_2';
     protected $description = 'Process stored webhook events';
 
     public function __construct()
@@ -23,7 +23,7 @@ class ProcessWebhookEvents extends Command
     {
         $processed_ids = [];
         // Fetch unique object IDs from the WebhookPayload table
-        $events = WebhookPayload::limit(20)
+        $events = WebhookPayload::limit(8)
             ->get();
 
         // Instantiate controllers
