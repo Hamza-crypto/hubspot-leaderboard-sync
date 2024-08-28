@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('telescope:prune --hours=24')->daily();
         $schedule->command('process_webhook')->everyMinute();
-        $schedule->command('inspire')->everyMinute();
+        // $schedule->command('inspire')->everyMinute();
     }
 
     /**
