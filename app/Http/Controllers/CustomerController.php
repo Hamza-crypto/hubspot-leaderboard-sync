@@ -30,11 +30,10 @@ class CustomerController extends Controller
 
         if ($existingCustomer) {
             //If customer agent has been updated
-            if($customerData['agent'] != $existingCustomer->agent) {
+            if ($customerData['agent'] != $existingCustomer->agent) {
                 Leaderboard::where('agent', $existingCustomer->agent)->delete();
             }
             // Update the existing customer's "of_applicants" field
-            dump();
             $existingCustomer->update($customerData);
 
             $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
@@ -54,7 +53,7 @@ class CustomerController extends Controller
 
     private function getFullName($properties)
     {
-        if($properties['customer_name'] != null) {
+        if ($properties['customer_name'] != null) {
             return $properties['customer_name'];
         }
 
