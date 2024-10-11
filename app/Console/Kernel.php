@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('telescope:prune --hours=24')->daily();
-        $schedule->command('process_webhook')->everyMinute();
+        // $schedule->command('process_webhook')->everyMinute();
         // $schedule->command('inspire')->everyMinute();
     }
 
