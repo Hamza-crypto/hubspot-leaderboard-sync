@@ -93,6 +93,10 @@ Route::get('payloads', function () {
     dd("Total payloads: " . WebhookPayload::count());
 });
 
+Route::get('phpinfo', function () {
+    echo phpinfo();
+});
+
 
 
 Route::get('check_path', function () {
