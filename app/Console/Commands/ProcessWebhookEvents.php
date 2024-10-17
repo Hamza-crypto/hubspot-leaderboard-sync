@@ -23,7 +23,7 @@ class ProcessWebhookEvents extends Command
     {
         $processed_ids = [];
         // Fetch unique object IDs from the WebhookPayload table
-        $events = WebhookPayload::limit(1)
+        $events = WebhookPayload::limit(10)
             ->get();
 
         // Instantiate controllers
@@ -44,7 +44,7 @@ class ProcessWebhookEvents extends Command
 
             // Call the HubSpot API
             $response = $hubspotController->call($url, 'GET');
-dump($response);
+
             WebhookPayload::where('object_id', $object_id)->where('occured_at', $event->occured_at)->delete();
 
             // If the response is empty or invalid, delete the associated customer
