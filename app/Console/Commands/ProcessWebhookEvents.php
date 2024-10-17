@@ -23,7 +23,7 @@ class ProcessWebhookEvents extends Command
     {
         $processed_ids = [];
         // Fetch unique object IDs from the WebhookPayload table
-        $events = WebhookPayload::limit(15)
+        $events = WebhookPayload::limit(1)
             ->get();
 
         // Instantiate controllers
