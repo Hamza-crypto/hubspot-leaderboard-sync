@@ -44,7 +44,7 @@ class ProcessWebhookEvents extends Command
 
             // Call the HubSpot API
             $response = $hubspotController->call($url, 'GET');
-
+dump($response);
             WebhookPayload::where('object_id', $object_id)->where('occured_at', $event->occured_at)->delete();
 
             // If the response is empty or invalid, delete the associated customer
