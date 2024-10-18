@@ -32,18 +32,17 @@ class HubspotController extends Controller
         // Get the headers from the response
         $headers = $response->headers();
 
-        $rateLimitRemaining = isset($headers['X-HubSpot-RateLimit-Remaining'][0]) ? (int) $headers['X-HubSpot-RateLimit-Remaining'][0] : null;
-        $secondlyRateLimitRemaining = isset($headers['X-HubSpot-RateLimit-Secondly-Remaining'][0]) ? (int) $headers['X-HubSpot-RateLimit-Secondly-Remaining'][0] : null;
+        $rateLimitRemaining = isset($headers['x-hubspot-ratelimit-remaining'][0]) ? (int) $headers['x-hubspot-ratelimit-remaining'][0] : null;
+        $secondlyRateLimitRemaining = isset($headers['x-hubspot-ratelimit-secondly-remaining'][0]) ? (int) $headers['x-hubspot-ratelimit-secondly-remaining'][0] : null;
 
         if ($rateLimitRemaining < 3) {
-            sleep(10);
+            dump('I am sleeping');
+            sleep(5);
         }
-
-        if ($secondlyRateLimitRemaining < 3) {
-            sleep(10);
+        elseif ($secondlyRateLimitRemaining < 3) {
+            dump('I am sleeping 2');
+            sleep(5);
         }
-
-
         return $response->json();
     }
 
