@@ -89,6 +89,10 @@ Route::get('webhook/process', function () {
     Artisan::call('process_webhook');
 });
 
+Route::get('backup', function () {
+    Artisan::call('backup:full');
+});
+
 Route::get('payloads', function () {
     dd("Total payloads: " . WebhookPayload::count());
 });
