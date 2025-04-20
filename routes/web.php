@@ -94,3 +94,4 @@ Route::get('phpinfo', function () {
 Route::get('check_path', function () {
     dump(env('APP_NAME'));
 });
+//
