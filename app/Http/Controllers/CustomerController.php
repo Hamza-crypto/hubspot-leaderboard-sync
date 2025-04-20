@@ -19,10 +19,6 @@ class CustomerController extends Controller
             'name' => $this->getFullName($data['properties']),
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
-            'leads' => $this->getNumberOfApplicants($data['properties']),
-            'tab' => isset($data['properties']['zap_types']) ? $data['properties']['zap_types'] : 'No Cost ACA',
-            'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'AOR SWITCH',
-            'date' => !empty($data['properties']['date']) ? $data['properties']['date'] : null
         ];
 
         // Check if the customer already exists in the database
@@ -53,10 +49,6 @@ class CustomerController extends Controller
 
     private function getFullName($properties)
     {
-        if ($properties['customer_name'] != null) {
-            return $properties['customer_name'];
-        }
-
         $firstName = isset($properties['firstname']) ? $properties['firstname'] : '';
         $lastName = isset($properties['lastname']) ? $properties['lastname'] : '';
 
