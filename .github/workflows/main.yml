@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - prime_medicare_solutions
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -16,18 +16,11 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-
-      # Deploy to the second server
-      - name: 📂 Sync files to ACA HelpLine
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USER1 }}
+          username: ${{ secrets.FTP_USER2 }}
           password: ${{ secrets.FTP_PASSWORD }}
 
 # To deploy to ACA HELP LINE server, just change FTP_USER to FTP_USER1
 
 # FTP_USER = NCA LEaderboard
 # FTP_USER1 = ACA HelpLine
+# FTP_USER2 = PrimeMediCareSolutions
