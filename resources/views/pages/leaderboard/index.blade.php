@@ -30,7 +30,7 @@
     <div class="max-w-6xl mx-auto">
         <!-- Main Title -->
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-            Medicare Sales
+            Medicare Sales - {{ \Carbon\Carbon::now()->format('F jS, Y') }}
         </h1>
 
         <!-- Main Content Grid -->
