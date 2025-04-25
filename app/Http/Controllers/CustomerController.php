@@ -18,7 +18,8 @@ class CustomerController extends Controller
             'customer_id' => $data['id'],
             'name' => $this->getFullName($data['properties']),
             'email' => $data['properties']['email'],
-            'agent' => isset($data['properties']['agent']) ? $data['properties']['agent'] : '',
+            'agent' => isset($data['properties']['closer']) ? $data['properties']['closer'] : '',
+            'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'Unknown',
         ];
 
         // Check if the customer already exists in the database
@@ -32,7 +33,7 @@ class CustomerController extends Controller
             // Update the existing customer's "of_applicants" field
             $existingCustomer->update($customerData);
 
-            $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
+            // $data_array['msg'] = sprintf('Customer updated: %s %s', $customerData['agent'], $customerData['leads']);
 
 
 
@@ -40,7 +41,7 @@ class CustomerController extends Controller
             // Create a new customer record
             Customer::create($customerData);
 
-            $data_array['msg'] = sprintf('New customer created: %s %s', $customerData['agent'] ?? 'agent', $customerData['leads'] ?? 0);
+            // $data_array['msg'] = sprintf('New customer created: %s %s', $customerData['agent'] ?? 'agent', $customerData['leads'] ?? 0);
         }
         // Notification::route(TelegramChannel::class, '')->notify(new GeneralNotification($data_array));
 
