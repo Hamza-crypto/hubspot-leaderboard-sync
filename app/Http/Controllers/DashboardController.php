@@ -9,73 +9,46 @@ use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
-    //For admin dashboard
     public function index()
     {
-        $clock_exp = 'CLOCK EXPIRATION';
-        $prospect_ = 'PROSPECT';
+        $startOfToday = Carbon::today();
+        $endOfToday = Carbon::now();    
 
-        if(env('APP_NAME') == 'Leaderboard NCA HELP') {
-            $clock_exp = 'CLOCK EXP NOTICE';
-            $prospect_ = 'PROSPECT MODE';
-        }
-
-        // dd(now());
-        // $total_customers = Customer::count();
-        $total_deals = Customer::sum('leads');
-
-
-        // Current Total Deals for the current day
-        $current_day_deals = Customer::whereDate('date', Carbon::today())->sum('leads');
-
-        // Weekly Total of Deals for current week
         $start_of_week = Carbon::now()->startOfWeek();
         $end_of_week = Carbon::now()->endOfWeek();
-        $weekly_deals = Customer::whereBetween('date', [$start_of_week, $end_of_week])->sum('leads');
 
-        // Monthly Total of Deals for month
         $start_of_month = Carbon::now()->startOfMonth();
         $end_of_month = Carbon::now()->endOfMonth();
-        $monthly_deals = Customer::whereBetween('date', [$start_of_month, $end_of_month])->sum('leads');
 
-        $active = Customer::where('status', 'Active')->sum('leads');
-        $cancelled = Customer::where('status', 'CANCELLED')->sum('leads');
-        $aor_switched = Customer::where('status', 'AOR SWITCH')->sum('leads');
+        $total_customers = Customer::count();
 
-        $carrier_to_carrier = Customer::where('status', 'CARRIER TO CARRIER')->sum('leads');
-        $existing_customer = Customer::where('status', 'EXISTING CUSTOMER')->sum('leads');
-        $enrollment_issues = Customer::where('status', 'ENROLLMENT ISSUE')->sum('leads');
+        $today_sales = Customer::whereBetween('updated_at', [$startOfToday, $endOfToday])->count();
+        $weekly_sales = Customer::whereBetween('updated_at', [$start_of_week, $end_of_week])->count();
 
-        // $unpaid = Customer::where('status', 'UNPAID')->sum('leads');
-        $prospect = Customer::where('status', $prospect_)->sum('leads');
+        $monthly_sales = Customer::whereBetween('updated_at', [$start_of_month, $end_of_month])->count();
 
-
-
-
-        $clock_exp_notice = Customer::where('status', $clock_exp)->sum('leads');
+        $active = Customer::where('status', 'Active')->count();
+        $cancelled = Customer::where('status', 'Cancelled')->count();
+        $duplicate = Customer::where('status', 'Duplicate')->count();
+        $future_active = Customer::where('status', 'Future Active Policy')->count();
+        $no_carrier_match = Customer::where('status', 'No Carrier Match')->count();
+        $unknown = Customer::where('status', 'Unknown')->count();
+        $denied = Customer::where('status', 'Denied')->count();
+        $pending = Customer::where('status', 'Pending')->count();
 
         $response = [
-            // 'total_users' => $total_customers,
-
-            'total_deals' => $total_deals,
-            'current_day' => $current_day_deals,
-            'weekly' => $weekly_deals,
-            'monthly' => $monthly_deals,
-
+            'total_customers' => $total_customers,
+            'today_sales' => $today_sales,
+            'weekly_sales' => $weekly_sales,
+            'monthly_sales' => $monthly_sales,
             'active' => $active,
             'cancelled' => $cancelled,
-            'aor_switched' => $aor_switched,
-
-            'carrier_to_carrier' => $carrier_to_carrier,
-            'existing_customer' => $existing_customer,
-            'enrollment_issues' => $enrollment_issues,
-
-            // 'unpaid' => $unpaid,
-            'prospect' => $prospect,
-            'clock_exp_notice' => $clock_exp_notice,
-
-            'users_chart' => $this->chartData(Customer::class),
-            'deals_chart' => $this->dealsChartData(Customer::class),
+            'duplicate' => $duplicate,
+            'future_active_policy' => $future_active,
+            'no_carrier_match' => $no_carrier_match,
+            'unknown' => $unknown,
+            'denied' => $denied,
+            'pending' => $pending
         ];
 
         return response()->json($response);

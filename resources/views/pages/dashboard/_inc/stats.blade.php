@@ -5,4 +5,4 @@
 
 {{-- @include('pages.dashboard._inc.plans.stat') --}}
 
-@include('pages.dashboard._inc.chart')
+{{-- @include('pages.dashboard._inc.chart') --}}

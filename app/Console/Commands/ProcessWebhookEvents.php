@@ -51,7 +51,7 @@ class ProcessWebhookEvents extends Command
             if (!$response) {
                 $customer = Customer::where('customer_id', $object_id)->first();
                 if ($customer) {
-                    Leaderboard::where('agent', $customer->agent)->delete();
+                    //Leaderboard::where('agent', $customer->agent)->delete();
                     $customer->delete();
                 }
                 continue;

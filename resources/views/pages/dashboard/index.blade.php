@@ -81,11 +81,11 @@
                 success: function(response) {
                     populateWidgets(response);
 
-                    renderChart('usersChart', response.users_chart.labels, response.users_chart.createdData,
-                        'New customers in last 7 days', 'Number of customers');
+                    // renderChart('usersChart', response.users_chart.labels, response.users_chart.createdData,
+                    //     'New customers in last 7 days', 'Number of customers');
 
-                    renderChart('dealsChart', response.deals_chart.labels, response.deals_chart.createdData,
-                        'New deals in last 7 days', 'Number of deals');
+                    // renderChart('dealsChart', response.deals_chart.labels, response.deals_chart.createdData,
+                    //     'New deals in last 7 days', 'Number of deals');
                 },
                 error: function() {
                     alert('Failed to fetch stats from the API.');
@@ -93,26 +93,8 @@
             });
         }
 
-        function fetchDataForOtherHubspot() {
-            const oppositeServerUrl = "{{ env('OPPOSITE_SERVER_API_URL') }}";
-
-            $.ajax({
-                url: oppositeServerUrl,
-                method: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    populateWidgets(response);
-                },
-                error: function() {
-                    console.log('Failed to fetch stats from other HubSpot API.');
-                }
-            });
-        }
-
-
         $(document).ready(function() {
             fetchData();
-            fetchDataForOtherHubspot();
         });
     </script>
 @endsection
