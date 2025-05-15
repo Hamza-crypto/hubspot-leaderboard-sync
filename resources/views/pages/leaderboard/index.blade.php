@@ -40,7 +40,7 @@
             <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
                 <h2 class="flex items-center text-xl font-semibold text-gray-700 mb-6">
                     <span class="text-2xl mr-3">🔥</span>
-                    Daily Sales Leaderboard
+                    Daily Sales Leaderboard: Total count: <span class="ml-1 font-bold"><?= $today_total_deals ?></span>
                 </h2>
                 <div class="space-y-6">
                     @forelse ($dailyLeaders as $leader)

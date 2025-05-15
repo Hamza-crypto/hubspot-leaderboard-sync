@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Leaderboard;
+use App\Models\Customer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -38,11 +38,13 @@ class LeaderboardController extends Controller
 
         $weeklyLeaders = $baseQuery($startOfWeek, $now)->limit(6)->get();
         $monthlyLeaders = $baseQuery($startOfMonth, $now)->limit(6)->get();
+        $today_sales = Customer::whereBetween('updated_at', [$today, $now])->count();
 
         return view('pages.leaderboard.index', [ 
             'dailyLeaders' => $dailyLeaders,
             'weeklyLeaders' => $weeklyLeaders,
             'monthlyLeaders' => $monthlyLeaders,
+            'today_total_deals' => $today_sales,
         ]);
     }
 }
