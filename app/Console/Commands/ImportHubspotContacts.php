@@ -14,9 +14,8 @@ class ImportHubspotContacts extends Command
 
     public function handle()
     {
-
         $filename = "all-contacts.csv";
-        $filePath = public_path($filename);
+        $filePath = storage_path($filename);
 
         if (!file_exists($filePath)) {
             dump("File not found: $filePath");
@@ -71,11 +70,11 @@ class ImportHubspotContacts extends Command
             'customer_id' => $data[0],
             'name' => $data[1] . ' ' . $data[2],
             'date' => $date,
-             'leads' => !empty($data[4]) ? $data[4] : 0,
+            'leads' => 0,
             'agent' => $data[5] ?? '',
             'email' => '',
-            'tab' => 'No Cost ACA',
-            'status' => $data[6] ?? 'AOR SWITCH',
+            'tab' => '',
+            'status' => $data[17] ?? 'Unknown',
             'created_at' => '2024-06-10 00:00:00',
             'updated_at' => '2024-06-10 00:00:00',
         ];
