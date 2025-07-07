@@ -21,7 +21,7 @@ class LeaderboardController extends Controller
                 ->select('agent', DB::raw('COUNT(*) as customer_count'))
                 ->whereNotNull('agent')
                 ->where('agent', '!=', '')
-                ->whereBetween('date', [$startDate, $endDate])
+                ->whereBetween('updated_at', [$startDate, $endDate])
                 ->groupBy('agent')
                 ->orderByDesc('customer_count');
         };
@@ -30,7 +30,7 @@ class LeaderboardController extends Controller
             ->select('agent', DB::raw('COUNT(*) as customer_count'))
             ->whereNotNull('agent')
             ->where('agent', '!=', '')
-            ->whereDate('date', $today)
+            ->whereDate('updated_at', $today)
             ->groupBy('agent')
             ->orderByDesc('customer_count')
             ->limit(500)
@@ -38,7 +38,7 @@ class LeaderboardController extends Controller
 
         $weeklyLeaders = $baseQuery($startOfWeek, $now)->limit(6)->get();
         $monthlyLeaders = $baseQuery($startOfMonth, $now)->limit(6)->get();
-        $today_sales = Customer::whereBetween('date', [$today, $now])->count();
+        $today_sales = Customer::whereBetween('updated_at', [$today, $now])->count();
 
         return view('pages.leaderboard.index', [
             'dailyLeaders' => $dailyLeaders,
