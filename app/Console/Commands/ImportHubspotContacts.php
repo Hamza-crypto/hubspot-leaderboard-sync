@@ -61,7 +61,7 @@ class ImportHubspotContacts extends Command
         if ($date !== null) {
             $date = date_create_from_format('Y-m-d', $date);
             if (!$date) {
-                $date = null; // Set date to null if it's not a valid format
+                $date = now(); // Set date to null if it's not a valid format
             }
         }
 
@@ -75,8 +75,8 @@ class ImportHubspotContacts extends Command
             'email' => '',
             'tab' => '',
             'status' => $data[17] ?? 'Unknown',
-            'created_at' => '2024-06-10 00:00:00',
-            'updated_at' => '2024-06-10 00:00:00',
+            'created_at' => $date ?? now(),
+            'updated_at' => $date ?? now(),
         ];
     }
 

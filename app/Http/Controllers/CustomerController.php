@@ -20,6 +20,7 @@ class CustomerController extends Controller
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['closer']) ? $data['properties']['closer'] : '',
             'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'Unknown',
+            'date' => isset($data['properties']['date']) ? $data['properties']['date'] : $data['createdAt'],
         ];
 
         // Check if the customer already exists in the database
