@@ -38,7 +38,7 @@ class LeaderboardController extends Controller
 
         $weeklyLeaders = $baseQuery($startOfWeek, $now)->limit(6)->get();
         $monthlyLeaders = $baseQuery($startOfMonth, $now)->limit(6)->get();
-        $today_sales = Customer::whereBetween('updated_at', [$today, $now])->count();
+        $today_sales = Customer::whereBetween('date', [$today, $now])->count();
 
         return view('pages.leaderboard.index', [
             'dailyLeaders' => $dailyLeaders,
