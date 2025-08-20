@@ -30,7 +30,7 @@ class LeaderboardController extends Controller
             ->select('agent', DB::raw('COUNT(*) as customer_count'))
             ->whereNotNull('agent')
             ->where('agent', '!=', '')
-            ->whereDate('updated_at', $today)
+            ->whereDate('date', $today)
             ->groupBy('agent')
             ->orderByDesc('customer_count')
             ->limit(500)
