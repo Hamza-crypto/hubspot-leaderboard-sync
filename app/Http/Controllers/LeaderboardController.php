@@ -21,7 +21,7 @@ class LeaderboardController extends Controller
                 ->select('agent', DB::raw('COUNT(*) as customer_count'))
                 ->whereNotNull('agent')
                 ->where('agent', '!=', '')
-                ->whereBetween('updated_at', [$startDate, $endDate])
+                ->whereBetween('date', [$startDate, $endDate])
                 ->groupBy('agent')
                 ->orderByDesc('customer_count');
         };
