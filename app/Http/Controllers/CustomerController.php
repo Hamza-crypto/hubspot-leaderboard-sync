@@ -12,6 +12,9 @@ class CustomerController extends Controller
 {
     public function store($data)
     {
+        if(!isset($data['properties']['date'])){ //without date, we can't accept
+           return;
+        }
 
         // Extract data from the input array
         $customerData = [
@@ -20,7 +23,7 @@ class CustomerController extends Controller
             'email' => $data['properties']['email'],
             'agent' => isset($data['properties']['closer']) ? $data['properties']['closer'] : '',
             'status' => isset($data['properties']['status']) ? $data['properties']['status'] : 'Unknown',
-            'date' => isset($data['properties']['date']) ? $data['properties']['date'] : $data['createdAt'],
+            'date' => $data['properties']['date']
         ];
 
         // Check if the customer already exists in the database
