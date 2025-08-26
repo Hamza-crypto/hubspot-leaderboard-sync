@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         $startOfToday = Carbon::today();
-        $endOfToday = Carbon::now();    
+        $endOfToday = Carbon::now();
 
         $start_of_week = Carbon::now()->startOfWeek();
         $end_of_week = Carbon::now()->endOfWeek();
@@ -22,10 +22,10 @@ class DashboardController extends Controller
 
         $total_customers = Customer::count();
 
-        $today_sales = Customer::whereBetween('updated_at', [$startOfToday, $endOfToday])->count();
-        $weekly_sales = Customer::whereBetween('updated_at', [$start_of_week, $end_of_week])->count();
+        $today_sales = Customer::whereBetween('date', [$startOfToday, $endOfToday])->count();
+        $weekly_sales = Customer::whereBetween('date', [$start_of_week, $end_of_week])->count();
 
-        $monthly_sales = Customer::whereBetween('updated_at', [$start_of_month, $end_of_month])->count();
+        $monthly_sales = Customer::whereBetween('date', [$start_of_month, $end_of_month])->count();
 
         $active = Customer::where('status', 'Active')->count();
         $cancelled = Customer::where('status', 'Cancelled')->count();

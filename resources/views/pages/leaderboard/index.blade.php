@@ -77,7 +77,7 @@
 <div class="bg-white rounded-xl shadow-md p-6">
     <h2 class="flex items-center text-xl font-semibold text-gray-700 mb-4">
         <span class="text-2xl mr-3">🥈</span>
-        Weekly Leaders
+        Weekly Leaders (Top 6)
     </h2>
     <div class="space-y-2 text-sm">
         @forelse ($weeklyLeaders as $leader)
@@ -95,7 +95,7 @@
 <div class="bg-white rounded-xl shadow-md p-6">
     <h2 class="flex items-center text-xl font-semibold text-gray-700 mb-4">
         <span class="text-2xl mr-3">🏆</span>
-        Monthly Leaders
+        Monthly Leaders (Top 6)
     </h2>
      <div class="space-y-2 text-sm">
          @forelse ($monthlyLeaders as $leader)

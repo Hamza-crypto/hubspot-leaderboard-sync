@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Customer;
-use App\Models\Leaderboard;
 use App\Models\WebhookPayload;
 use Illuminate\Console\Command;
 use App\Http\Controllers\HubspotController;
@@ -33,7 +32,7 @@ class ProcessWebhookEvents extends Command
         foreach ($events as $event) {
             $object_id = $event->object_id;
 
-            if(in_array($object_id, $processed_ids)) { //if this object is laready processed in this run,  then ignore it.
+            if(in_array($object_id, $processed_ids)) { //if this object is already processed in this run,  then ignore it.
                 continue;
             }
 

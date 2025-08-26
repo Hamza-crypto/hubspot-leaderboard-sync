@@ -14,6 +14,7 @@ class ImportHubspotContacts extends Command
 
     public function handle()
     {
+        DB::table('customers')->truncate();
         $filename = "all-contacts.csv";
         $filePath = storage_path($filename);
 
@@ -55,11 +56,18 @@ class ImportHubspotContacts extends Command
         return 0;
     }
 
+    private function format_timestamp($date)
+    {
+        $date = date_create_from_format('d/m/Y H:i', $date);
+        $mysqlDate = $date ? $date->format('Y-m-d H:i:s') : null;
+        return $mysqlDate;
+    }
+
     private function mapRecord(array $data)
     {
-        $date = !empty($data[3]) ? $data[3] : null;
+        $date = !empty($data[6]) ? $data[6] : null;
         if ($date !== null) {
-            $date = date_create_from_format('Y-m-d', $date);
+            $date = date_create_from_format('d/m/Y', $date);
             if (!$date) {
                 $date = now(); // Set date to null if it's not a valid format
             }
@@ -67,16 +75,16 @@ class ImportHubspotContacts extends Command
 
         // Map CSV fields to database fields
         return [
-            'customer_id' => $data[0],
+            'customer_id' => isset($data[0]) ? trim((string) $data[0]) : null,
             'name' => $data[1] . ' ' . $data[2],
             'date' => $date,
             'leads' => 0,
-            'agent' => $data[5] ?? '',
+            'agent' => $data[4] ?? '',
             'email' => '',
             'tab' => '',
-            'status' => $data[17] ?? 'Unknown',
-            'created_at' => $date ?? now(),
-            'updated_at' => $date ?? now(),
+            'status' => $data[7] ?? 'Unknown',
+            'created_at' => $this->format_timestamp($data[5]),
+            'updated_at' => $this->format_timestamp($data[8]),
         ];
     }
 
