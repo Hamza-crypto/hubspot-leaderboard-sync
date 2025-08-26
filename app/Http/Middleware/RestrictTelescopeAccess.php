@@ -15,6 +15,8 @@ class RestrictTelescopeAccess
             '2402:ad80:f8:4fb4:62e4:8cd8:fae7:1697',
             '154.*.*.*', // Jazz
             '103.204.*.*', // Wifi
+            '149.40.50.*', // Wifi
+            '127.*.*.*', // Wifi
         ];
 
         if (!$this->isAllowedIp($request->ip(), $allowedIps)) {
